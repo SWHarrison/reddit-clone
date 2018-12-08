@@ -1,4 +1,5 @@
 const Comment = require('../models/comment');
+const Post = require('../models/post');
 
 module.exports = app => {
 
@@ -6,6 +7,7 @@ module.exports = app => {
     app.post("/posts/:postId/comments", function(req, res) {
       // INSTANTIATE INSTANCE OF MODEL
       const comment = new Comment(req.body);
+      console.log(req.params)
 
       // SAVE INSTANCE OF Comment MODEL TO DB
       comment
@@ -18,7 +20,7 @@ module.exports = app => {
           return post.save();
         })
         .then(post => {
-          res.redirect(`/`);
+          res.redirect(`/posts/${req.params.postId}`);
         })
         .catch(err => {
           console.log(err);
