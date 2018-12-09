@@ -6,6 +6,7 @@ module.exports = app => {
         Post.find()
             .then(posts => {
                 console.log(posts)
+                console.log(req.cookies);
                 res.render('posts-index', {posts: posts});
             })
             .catch(err => {
@@ -34,13 +35,11 @@ module.exports = app => {
 
     app.get("/posts/:id", function(req, res) {
         // LOOK UP THE POST
-        Post.findById(req.params.id)
-            .then(post => {
-                res.render("post-show", { post });
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
+        Post.findById(req.params.id).populate('comments').then((post) => {
+            res.render("post-show", { post })
+        }).catch((err) => {
+            console.log(err.message)
+        })
     });
 
     // SUBREDDIT
