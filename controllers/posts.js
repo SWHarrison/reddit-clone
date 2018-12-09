@@ -3,14 +3,15 @@ const Post = require('../models/post');
 module.exports = app => {
 
     app.get('/', (req, res) => {
-        Post.find()
+        var currentUser = req.user;
+        console.log(req.user)
+
+        Post.find({})
             .then(posts => {
-                console.log(posts)
-                console.log(req.cookies);
-                res.render('posts-index', {posts: posts});
+                res.render("posts-index", { posts, currentUser });
             })
             .catch(err => {
-                console.log(err);
+                console.log(err.message);
             });
     });
 

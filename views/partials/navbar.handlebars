@@ -6,15 +6,21 @@
             <a class="navbar-brand" href="/">
                 Reddit.js
             </a>
-            <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>
+            {{#if currentUser}}
+                <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>
+            {{/if}}
         </div>
     </div>
 
     <div class="container">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login">Login</a></li>
+          {{#if currentUser}}
             <li><a href="/logout">Logout</a></li>
+            <li>Welcome {{currentUser.username}}!<li>
+          {{else}}
+            <li><a href="/login">Login</a></li>
             <li><a href="/sign-up">Sign Up</a></li>
+          {{/if}}
         </ul>
     </div>
 </nav>
