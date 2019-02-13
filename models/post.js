@@ -26,4 +26,8 @@ PostSchema.pre("save", function(next) {
   next();
 });
 
+PostSchema
+    .pre('findOne', Populate('author'))
+    .pre('find', Populate('author'))
+
 module.exports = mongoose.model("Post", PostSchema);
