@@ -22,6 +22,7 @@ require('./data/reddit-db.js');
 const post = require('./controllers/posts.js');
 const comment = require('./controllers/comments.js');
 const auth = require('./controllers/auth.js');
+const replies = require('./controllers/replies.js');
 
 var exphbs = require('express-handlebars');
 
@@ -48,6 +49,7 @@ app.use(checkAuth);
 post(app)
 comment(app)
 auth(app)
+replies(app)
 
 app.listen(process.env.PORT || '3000', () => {
     console.log(`App listening on port 3000!`)
