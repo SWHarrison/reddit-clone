@@ -107,7 +107,7 @@ module.exports = app => {
     var currentUser = req.user;
     Post.findById(req.params.id).populate('comments').lean()
         .then(post => {
-            res.render("posts-show", { post, currentUser });
+            res.render("post-show", { post, currentUser });
         })
         .catch(err => {
             console.log(err.message);

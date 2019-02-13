@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Populate = require("../util/autopopulate");
-const Comment = require("../models/comment");
 
 const PostSchema = new Schema({
   createdAt: { type: Date },
@@ -10,7 +9,7 @@ const PostSchema = new Schema({
   url: { type: String, required: true },
   summary: { type: String, required: true },
   subreddit: { type: String, required: true },
-  comments: [Comment.schema],
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   author : { type: Schema.Types.ObjectId, ref: "User", required: true }
 });
 
